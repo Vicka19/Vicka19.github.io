@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obra de Net.Art</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #e0e0ff, #a0a0e0);
+            font-family: Arial, sans-serif;
+            transition: background 3s ease-in-out;
+            margin: 0;
+        }
+        ##contenedor {
+            text-align: center;
+        }
+        #boton {
+            font-size: 24px;
+            padding: 15px;
+            cursor: pointer;
+            border: 2px solid black;
+            background: none;
+        }
+        #mensaje {
+            display: none;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        #boton-mensaje {
+            font-size: 14px;
+            padding: 8px;
+            cursor: pointer;
+            border: 2px solid black;
+            background: none;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 101;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="contenedor">
+        <button id="boton">Ver la obra</button>
+        <p id="mensaje">Esta es una obra de Net.Art. Si no la entiendes, es tu problema.</p>
+    </div>
+
+    <script>
+        let clicks = 0;
+        const colors = [
+            "linear-gradient(45deg, #c7a0d6, #9b7fbc)",
+            "linear-gradient(45deg, #9b7fbc, #7e64a8)",
+            "linear-gradient(45deg, #7e64a8, #6d4f97)",
+            "linear-gradient(45deg, #6d4f97, #5a3f85)",
+            "linear-gradient(45deg, #5a3f85, #4a2f74)",
+            "linear-gradient(45deg, #4a2f74, #3f2262)",
+            "linear-gradient(45deg, #3f2262, #2f1951)",
+            "linear-gradient(45deg, #2f1951, #201342)",
+            "linear-gradient(45deg, #201342, #140a32)",
+            "linear-gradient(45deg, #140a32, #0e0022)",
+            "linear-gradient(45deg, #0e0022, #2c0047)",
+            "linear-gradient(45deg, #2c0047, #47005c)",
+            "linear-gradient(45deg, #47005c, #590070)",
+            "linear-gradient(45deg, #590070, #7c0099)" // Último color más suave
+        ];
+        
+        // Inicializar el botón y el mensaje
+        const boton = document.getElementById("boton");
+        const mensaje = document.getElementById("mensaje");
+
+        boton.addEventListener("click", function() {
+            clicks++;
+            document.body.style.background = colors[Math.min(clicks, colors.length - 1)];
+            if (clicks >= 15) {
+                boton.style.display = "none"; // Ocultar el botón inicial
+                mensaje.style.display = "block"; // Mostrar el mensaje
+
+                // Crear un nuevo botón pequeño en la esquina inferior derecha
+                const botonMensaje = document.createElement("button");
+                botonMensaje.id = "boton-mensaje";
+                botonMensaje.textContent = "Inicio";
+                document.body.appendChild(botonMensaje);
+
+                // Acción del botón pequeño
+                botonMensaje.addEventListener("click", function() {
+                    location.reload(); // Recargar la página
+                });
+            }
+        });
+    </script>
+</body>
+</html>
